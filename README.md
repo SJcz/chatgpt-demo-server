@@ -34,7 +34,10 @@ aftr server start, it will start webscoket server and a http server.
 * http server default prot: 10010. 
 * websocket default port: 9090. 
 
-if you want change webscoket port, you can modify `WS_PORT` filed of .env file in the root folder
+if you want change webscoket port, you can modify `WS_PORT` field of `.env` file in the root folder
+
+##Snipaste
+
 
 
 ## Snipaste
