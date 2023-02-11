@@ -1,3 +1,5 @@
+[简体中文](https://github.com/SJcz/chatgpt-demo-server/blob/main/README-zh.md) | [English](https://github.com/SJcz/chatgpt-demo-server/blob/main/README.md)
+
 # chatgpt-demo-server
 server of chatgpt demo
 
