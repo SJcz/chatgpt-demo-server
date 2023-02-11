@@ -34,18 +34,14 @@ class Master {
 		worker.on('exit', (code: number, signal: string) => {
 			logger.info(`worker ${worker.id}, process ${worker.process.pid} exit. code=${code} signal=${signal}`)
 			delete cluster.workers[worker.id]
-			this.createWorker()
 		})
 		worker.on('error', (error: Error) => {
 			logger.info(`worker ${worker.id}, process ${worker.process.pid} error`)
 			logger.error(error)
 			delete cluster.workers[worker.id]
-			this.createWorker()
 		})
 		worker.on('disconnect', () => {
 			logger.info(`worker ${worker.id}, process ${worker.process.pid} disconnect`)
-			delete cluster.workers[worker.id]
-			this.createWorker()
 		})
 		logger.info(`create worker ${worker.id}, process ${worker.process.pid} successfully!`)
 	}
