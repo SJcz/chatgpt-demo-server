@@ -11,7 +11,7 @@ export class ChatpgtRobot {
     constructor(app: App) {
     	this.app = app
     	this.robot = new ChatGPTAPI({
-    		apiKey: process.env.CHATGPT_KEY as string
+    		apiKey: process.env.OPENAI_API_KEY as string
     	})
     }
 
