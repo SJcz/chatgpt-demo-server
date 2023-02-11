@@ -14,12 +14,12 @@ export class ChatgptConversationService {
 	}
 
 	createConversation(sessionUserId: string) {
-        if (!this.conversationCache[sessionUserId]) {
-            this.conversationCache[sessionUserId] = {
-                conversationId: '',
-                parentMessageId: ''
-            }
-        }
+		if (!this.conversationCache[sessionUserId]) {
+			this.conversationCache[sessionUserId] = {
+				conversationId: '',
+				parentMessageId: ''
+			}
+		}
 		return this.conversationCache[sessionUserId]
 	}
 
@@ -32,8 +32,8 @@ export class ChatgptConversationService {
 	}
 
 	updateConversation(sessionUserId: string, data: ChatgptConItem) {
-        this.conversationCache[sessionUserId] = data
-    }
+		this.conversationCache[sessionUserId] = data
+	}
 }
 
 export default function initChatgptConversationService(app: App) {
