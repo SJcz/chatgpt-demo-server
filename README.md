@@ -10,15 +10,29 @@ So, before run this project, below conditions need to be prepare:
  
 
 ## Usage
-1. Clone the repository:
-`git clone https://github.com/SJcz/chatgpt-demo-server`
+1. Clone the repository:  
+```
+git clone https://github.com/SJcz/chatgpt-demo-server
+```
 
-2. Install the dependencies:
-`npm install`
+2. Install the dependencies:  
+```
+npm install
+```
 
-3. Modify .env file in the root folder, set your OpenAI API key in the following format:
-`OPENAI_API_KEY=your_api_key`
+3. Modify .env file in the root folder, set your OpenAI API key in the following format:  
+```
+OPENAI_API_KEY=your_api_key
+```
 
-4. Start node server
-`npm run start`
+4. Start node server:  
+```
+npm run start
+```
+
+aftr server start, it will start webscoket server and a http server. 
+* http server default prot: 10010. 
+* websocket default port: 9090. 
+
+if you want change webscoket port, you can modify `WS_PORT` filed of .env file in the root folder
 
