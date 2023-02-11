@@ -36,9 +36,6 @@ aftr server start, it will start webscoket server and a http server.
 
 if you want change webscoket port, you can modify `WS_PORT` field of `.env` file in the root folder
 
-##Snipaste
-
-
 
 ## Snipaste
 <image src="/snipaste/Snipaste_chat.png" width="1200"/>
