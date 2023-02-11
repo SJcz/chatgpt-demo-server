@@ -1,5 +1,4 @@
 import App from '../app'
-import { IChannelUser, IPushMessage } from '../define/interface/common'
 
 interface ChatgptConItem {
     conversationId: string | undefined,

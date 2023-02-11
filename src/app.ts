@@ -1,34 +1,23 @@
 import events from 'events'
 import { v1 } from 'uuid'
-import Chance from 'chance'
 import WSConnector from './connector/ws.connector'
 import WSSession from './connector/ws.session'
 import { IHandlerMap, IStartOptions, IUser, IRequestMessage, IBasicMessage } from './define/interface/common'
-// import { RedisMessageRoute } from './define/interface/constant'
-import { getRandomAvatar } from './util/util'
 import log4js from 'log4js'
 import AppUtil from './util/appUtil'
 import initChatgptConversationService, { ChatgptConversationService } from './service/chatgptConversationService'
 const logger = log4js.getLogger()
 
-const chance = new Chance()
-
 class App extends events.EventEmitter {
 	handlerMap!: IHandlerMap;
-	// channelService!: ChannelService;
 	connector!: WSConnector;
 	chatgptConversationService!: ChatgptConversationService
-	// redisService!: RedisService;
-	// processService!: ProcessService
 
 	start(opts: IStartOptions) {
 		opts = opts || {}
 		this.connector = this.getScoketConnector(opts)
 		this.connector.start(opts)
 
-		// this.processService = initProcessService(this)
-		// this.redisService = initRedisService(this)
-		// this.channelService = initChannelService(this)
 		this.chatgptConversationService = initChatgptConversationService(this)
 
 		AppUtil.initHandlerMap(this)
@@ -38,12 +27,6 @@ class App extends events.EventEmitter {
 
 	_initEvents() {
 		this.connector.on('connection', this.handleConnection.bind(this))
-		// this.on('channel', (message: IRedisChannelMessage) => {
-		// 	if ([RedisMessageRoute.ROOM_CHAT, RedisMessageRoute.ROOM_JOIN, RedisMessageRoute.ROOM_LEAVE].includes(message.route as RedisMessageRoute)) {
-		// 		const channel = this.channelService.getChannel(message.data.room_id)
-		// 		if (channel) channel.pushMessage(<IPushMessage>message)
-		// 	}
-		// })
 	}
 
 	async handleConnection(session: WSSession) {
@@ -51,15 +34,12 @@ class App extends events.EventEmitter {
 		const userId = v1()
 		const user: IUser = {
 			userId,
-			avatar: await getRandomAvatar(),
-			username: chance.name(),
 			register_time: Date.now()
 		}
 		session.set('userId', userId)
 		session.set('user', user)
 		session.on('message', this.handleClientMessage.bind(this, session))
 		session.on('connect-error', () => { // 自定义的错误事件
-			// this.channelService.leave(session.userId)
 			this.chatgptConversationService.destroyConversation(session.userId)
 		})
 		logger.info(`session=${session.id} userId=${session.get('userId')} 连接到进程 ${process.pid}`)
@@ -81,7 +61,6 @@ class App extends events.EventEmitter {
 		}
 		try {
 			await this.handlerMap[handlerName][method](msg || {}, session)
-			// if (msg.type == 'request') return session.send(<IBasicMessage>{ type: 'response', code: 0, data: result, requestId: msg.requestId })
 		} catch (err) {
 			logger.error(err)
 			if (msg.type == 'request') return session.send(<IBasicMessage>{ type: 'response', code: 500, data: '服务器错误', requestId: msg.requestId })

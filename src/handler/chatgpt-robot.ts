@@ -2,7 +2,7 @@ import { ChatGPTAPI } from 'chatgpt'
 import App from '../app'
 import WSSession from '../connector/ws.session'
 import log4js from 'log4js'
-import { IBasicMessage, IRequestMessage } from '../define/interface/common'
+import { IBasicMessage, IRequestMessage, IResponseMessage } from '../define/interface/common'
 const logger = log4js.getLogger()
 
 export class ChatpgtRobot {
@@ -22,7 +22,7 @@ export class ChatpgtRobot {
             promptPrefix: '',
             // print the partial response as the AI is "typing"
             onProgress: (partialResponse) => {
-                session.send(<IBasicMessage>{ 
+                session.send(<IResponseMessage>{ 
                     type: 'response', 
                     code: 0, 
                     data: partialResponse.text, 
