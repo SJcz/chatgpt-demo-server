@@ -16,6 +16,10 @@ class ChatHandler {
 		await this.chatRobot.ask(message, session)
 		return 'ok'
 	}
+
+	test() {
+		console.log('TEST ChatHandler')
+	 }
 }
 
 module.exports = (app: App) => {

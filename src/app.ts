@@ -13,15 +13,16 @@ class App extends events.EventEmitter {
 	connector!: WSConnector;
 	chatgptConversationService!: ChatgptConversationService
 
-	start(opts: IStartOptions) {
+	async start(opts: IStartOptions) {
 		opts = opts || {}
 		this.connector = this.getScoketConnector(opts)
 		this.connector.start(opts)
 
 		this.chatgptConversationService = initChatgptConversationService(this)
 
-		AppUtil.initHandlerMap(this)
+		await AppUtil.initHandlerMap(this)
 
+		console.log(typeof this.handlerMap['chatHandler']['test'])
 		this._initEvents()
 	}
 

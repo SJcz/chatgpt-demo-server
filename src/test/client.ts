@@ -18,7 +18,7 @@ function testConnect(min: number, max: number) {
 			console.log('connect')
 			client.send(JSON.stringify({
 				type: 'request',
-				route: 'chatHandler.chat',
+				route: 'chatHandler.test',
 				requestId: String(i),
 				data:  '你好呀'
 			}))
