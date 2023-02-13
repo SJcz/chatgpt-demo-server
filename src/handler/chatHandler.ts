@@ -1,7 +1,7 @@
 import App from '../app'
 import WSSession from '../connector/ws.session'
 import { IRequestMessage } from '../define/interface/common'
-import { ChatpgtRobot } from './chatgpt-robot'
+import { ChatpgtRobot } from '../util/chatgpt-robot'
 
 class ChatHandler {
 	app: App;

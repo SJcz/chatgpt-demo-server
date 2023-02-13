@@ -10,12 +10,12 @@ class AppUtil {
 	}
 
 	private static _scanHandlerFolder(): string[] {
-		const dirPath = path.join(process.cwd(), './build/handler')
+		const dirPath = path.join(process.cwd(), './src/handler')
 		const files = fs.readdirSync(dirPath)
 		return files.map(file => {
 			const filePath = path.resolve(dirPath, file)
 			const stats = fs.statSync(filePath)
-			if (stats.isFile() && /\.(js)|(jsx)/.test(path.extname(file))) return filePath
+			if (stats.isFile() && /\.(js)|(jsx)|(ts)|(tsx)/.test(path.extname(file))) return filePath
 		}).filter(file => !!file) as string[]
 	}
 
@@ -26,7 +26,7 @@ class AppUtil {
 
 		const handlerMap: IHandlerMap = {}
 		for (const filePath of scanFiles) {
-			const handlerName = path.basename(filePath).replace(/\.(js)|(jsx)$/, '')
+			const handlerName = path.basename(filePath).replace(/\.(js)|(jsx)|(ts)|(tsx)$/, '')
 
 			// eslint-disable-next-line @typescript-eslint/no-var-requires
 			let handlerObj = require(filePath)
